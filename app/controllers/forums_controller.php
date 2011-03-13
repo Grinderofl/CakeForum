@@ -2,7 +2,7 @@
 
 class ForumsController extends AppController {
 	var $uses = array('Topic', 'Forum');
-	var $helpers = array('Time', 'Bbcode');
+	var $helpers = array('Time', 'Bbcode', 'ForumFunctions');
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -49,7 +49,16 @@ class ForumsController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Topic->recursive = 2;
-		//$this->Topic->unBindModel(array('hasMany' => array('Post')), false);
+		$this->Topic->unBindModel(array('hasMany' => array('Post')), false);
+		$this->Topic->bindModel(array('hasMany' => array(
+			'Post' => array(
+				'foreignKey' => 'topic_id',
+				'limit' => 1,
+				'order' => 'Post.created DESC'
+			)
+		)), false);
+		//$this->Topic->User->unbindModel(array('belongsTo' => array('Role')), false);
+		$this->Topic->Post->unbindModel(array('belongsTo' => array('Topic', 'Forum')), false);
 		$this->Topic->unBindModel(array('belongsTo' => array('Forum')), false);
 		$this->paginate = array(
 			'order' => 'Topic.id DESC',

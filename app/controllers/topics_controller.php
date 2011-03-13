@@ -52,11 +52,13 @@ class TopicsController extends AppController {
 		
 		$this->Topic->id = $topic;
 		$this->Post->recursive = 2;
-		
+		$this->Post->Topic->unbindModel(array('hasMany' => array('Post')), false);
+		$this->Post->Topic->unbindModel(array('belongsTo' => array('Forum')), false);
+		$this->Post->unbindModel(array('belongsTo' => array('Forum', 'Topic')), false);
 		// @todo Custom limit on posts per page
 		$this->paginate = array(
 			'conditions' => array('Post.topic_id' => $topic),
-			'limit' => 20
+			'limit' => $this->limit
 		);
 		$conditions = array('Post.topic_id' => $topic);
 		

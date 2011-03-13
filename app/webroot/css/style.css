@@ -252,6 +252,13 @@ ul#recruitment .statusblock {
 	margin-bottom:20px;
 }
 
+.topicpages {
+	font-size:12px;
+	padding-left:10px;
+}
+.topicpages a{
+	font-weight:bold;
+}
 .postlist {
 	list-style:none;
 	border:1px solid #111;

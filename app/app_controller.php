@@ -3,6 +3,7 @@ class AppController extends Controller {
 	var $components = array('Auth', 'Session');
 	var $helpers = array('Time', 'Html', 'Session', 'Form', 'Paginator');
 	var $uses = array('User');
+	var $limit = 20;
 	
 	function beforeRender() {
 		
@@ -12,6 +13,7 @@ class AppController extends Controller {
 		if($this->Auth->isAuthorized()) {
 			
 			$this->User->recursive = 2;
+			$this->set('limit', $this->limit);
 			
 			// We don't want user included twice, for speed purposes
 			$this->User->Role->unbindModel(array('hasMany' => array('User')));

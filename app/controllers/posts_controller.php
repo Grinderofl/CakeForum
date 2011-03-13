@@ -17,9 +17,16 @@ class PostsController extends AppController {
 				if($this->Post->save($this->data)) {
 					$id = $this->Post->id;
 					$this->Session->setFlash('Reply posted');
-					$this->redirect(array('controller' => 'topics', 'action' => 'view', $this->data['topic_id']."#{$id}"));
+					$this->Post->Topic->id = $this->data['Post']['topic_id'];
+					$pages = ceil($this->Post->Topic->field('post_count') / $this->limit);
+					
+					// Redirect to correct page
+					if($pages > 1) {
+						$this->redirect(array('controller' => 'topics', 'action' => 'view', $this->data['Post']['topic_id'], 'page' => $pages."#{$id}"));
+					} else {
+						$this->redirect(array('controller' => 'topics', 'action' => 'view', $this->data['Post']['topic_id']."#{$id}"));
+					}
 				}
-				
 			}
 		} else {
 			$this->redirect(array('controller' => 'forums'));

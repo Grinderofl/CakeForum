@@ -114,3 +114,6 @@
 2011-03-12 22:52:40 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\model\model.php, line 578]
 2011-03-12 23:40:40 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1111: Invalid use of group function</span> in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\model\datasources\dbo_source.php, line 684]
 2011-03-12 23:43:49 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'Topic.id' in 'where clause'</span> in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\model\datasources\dbo_source.php, line 684]
+2011-03-13 09:41:39 Warning: Warning (2): Division by zero in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\view\helpers\time.php, line 746]
+2011-03-13 09:42:09 Warning: Warning (2): Division by zero in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\view\helpers\time.php, line 746]
+2011-03-13 09:42:32 Warning: Warning (2): Division by zero in [D:\Zend\Apache2\htdocs\mortifera\cake\libs\view\helpers\time.php, line 746]

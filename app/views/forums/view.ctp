@@ -19,7 +19,9 @@
 		?>
 		<tr<?php echo ($cnt % 2)?' class="odd"':'';?>>
 			<td class="center newposts">&nbsp;</td>
-			<td><b class="forumtitle"><?php echo $html->link($topic['Topic']['title'], array('controller' => 'topics', 'action' => 'view', $topic['Topic']['id']));?></b></td>
+			<td><b class="forumtitle"><?php echo $html->link($topic['Topic']['title'], array('controller' => 'topics', 'action' => 'view', $topic['Topic']['id']));?></b>
+				 <?php echo $forumFunctions->pages($topic['Topic']['id'], $topic['Topic']['post_count'], $limit);?>
+			</td>
 			<td class="center"><?php echo $topic['Topic']['post_count'];?></td>
 			<td class="center">
 				<?php echo $html->link($topic['Post'][count($topic['Post'])-1]['User']['handle'], array('controller' => 'users', 'action' => 'view', $topic['Post'][count($topic['Post'])-1]['User']['id']));?>

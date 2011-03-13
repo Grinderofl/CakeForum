@@ -1,6 +1,20 @@
 <?php
+
+/**
+ * 
+ * BBCode helper plugin for CakePHP
+ * 
+ * Contains different formatting functions
+ * @author Nero
+ *
+ */
 class BbcodeHelper extends AppHelper {
 	
+	/**
+	 * 
+	 * Full list of bbcode regural expressions
+	 * @var Array
+	 */
 	var $bbcode = array(
 		"'\[center\](.*?)\[/center\]'is" => "<center>\\1</center>",
 		"'\[left\](.*?)\[/left\]'is" => "<div style='text-align: left;'>\\1</div>",
@@ -21,12 +35,25 @@ class BbcodeHelper extends AppHelper {
 		"'\[font=(.*?)\](.*?)\[/font\]'is" => "<span style='font-family: \\1;'>\\2</span></a>",
 	);
 	
+	/**
+	 * 
+	 * Format a string to bbcode
+	 * @param String $str Input string
+	 * @return Formatted bbcode string
+	 */
 	function format ($str) {
 		return $this->nl2p(
 			$this->bbcodeReplaceQuotes(
 			$this->bbcodeReplaceCommon($str)));
 	}
 	
+	/**
+	 * 
+	 * Converts line breaks to html paragraph entities
+	 * @param String $string Input text
+	 * @param Boolean $line_breaks Whether to use html breaks instead of paragraphs
+	 * @param Boolean $xml Is the input string XML
+	 */
 	private function nl2p($string, $line_breaks = false, $xml = true)
 	{
 	    $string = str_replace(array('<p>', '</p>', '<br>', '<br />'), '', $string);
@@ -36,11 +63,21 @@ class BbcodeHelper extends AppHelper {
 	    else 
 	        return '<p>'.preg_replace("/([\n]{1,})/i", "</p>\n<p>", trim($string)).'</p>';
 	}
-	  
+	 
+	/**
+	 * 
+	 * Replace common BBCode characters, doesn't touch specific formatted objects
+	 * @param String $str Input text
+	 */
 	private function bbcodeReplaceCommon ($str) {
 		return preg_replace(array_keys($this->bbcode), array_values($this->bbcode), $str);
 	}
 	
+	/**
+	 * 
+	 * Custom quote replacement function, allows recursive quoting
+	 * @param String $str Input text
+	 */
 	private function bbcodeReplaceQuotes ($str) {
 		$open = '<div class="bbquote"><b>Quote: </b><hr />';  
         $close = '</div>';
