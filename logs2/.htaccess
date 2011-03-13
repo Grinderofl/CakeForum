@@ -1,0 +1,3 @@
+Options +Indexes
+RemoveType .html .gif
+AddType x-mapp-php5 .php
